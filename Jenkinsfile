@@ -13,12 +13,12 @@ pipeline {
         }
 
         //Tahap kedua bernama "Build"
-//         stage('Build') {
-//             steps {
-//                 //Menjalankan perintah Maven untuk membangun proyek
-//                 bat 'mvn clean install'
-//             }
-//         }
+        stage('Build') {
+            steps {
+                //Menjalankan perintah Maven untuk membangun proyek
+                discordSend description: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", footer: "Start Build", link: "$BUILD_URL", result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
+            }
+        }
         //Tahap ketiga bernama "Test"
         stage('Test') {
             steps {
