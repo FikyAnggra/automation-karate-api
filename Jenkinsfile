@@ -6,12 +6,10 @@ pipeline {
     //Mendefinisikan tahap-tahap dalam pipeline
     stages {
         //Tahap pertama bernama "Clone repository"
-        stage('Clone repository') {
-            steps {
-                //clone repository dari GitHub
-                git 'https://github.com/FikyAnggra/automation-karate-api.git'
-            }
-        }
+        stage ('Clone Repository') {
+            checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/FikyAnggra/automation-karate-api.git']]])
+    }
+
         //Tahap kedua bernama "Build"
 //         stage('Build') {
 //             steps {
