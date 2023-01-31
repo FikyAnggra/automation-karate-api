@@ -30,7 +30,7 @@ pipeline {
             steps {
                 // send message to Discord
                 script {
-                    def webhookURL = "https://discordapp.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH/MTA2OTk1MTE0MjY3MjQ2NjA2Mg.GCW0qX.qO_gGQA6bA0EHLQVlVtaR_27Y_d4f_c1NwDsY8"
+                    def webhookURL = "https://discordapp.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH/MTA2OTk1MTE0MjY3MjQ2NjA2Mg.G7X_mh.cqyoKLU3WDbAuph6kWUtvOoq7i1R73FP-t5Xx4"
                     def message = """
                     Build ${env.BUILD_NUMBER} is complete!
                     Build status: ${currentBuild.currentResult}
