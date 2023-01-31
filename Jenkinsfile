@@ -16,14 +16,14 @@ pipeline {
         stage('Build') {
             steps {
                 //Menjalankan perintah Maven untuk membangun proyek
-                sh 'mvn clean install'
+                bat 'mvn clean install'
             }
         }
         //Tahap ketiga bernama "Test"
         stage('Test') {
             steps {
                 //Menjalankan tes menggunakan Maven
-                sh 'mvn test -Dtest=TestRunnerProearn'
+                bat 'mvn test -Dtest=TestRunnerProearn'
             }
         }
     }
