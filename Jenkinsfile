@@ -13,12 +13,12 @@ pipeline {
         }
 
         //Tahap kedua bernama "Build"
-        stage('Build') {
-            steps {
-                //Menjalankan perintah Maven untuk membangun proyek
-                bat 'mvn clean install'
-            }
-        }
+//         stage('Build') {
+//             steps {
+//                 //Menjalankan perintah Maven untuk membangun proyek
+//                 bat 'mvn clean install'
+//             }
+//         }
         //Tahap ketiga bernama "Test"
         stage('Test') {
             steps {
