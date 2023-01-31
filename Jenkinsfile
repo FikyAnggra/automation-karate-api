@@ -26,6 +26,19 @@ pipeline {
                 bat 'mvn test -Dtest=TestRunnerProearn#Regression'
             }
         }
+        stage('Notify Discord') {
+            steps {
+                // send message to Discord
+                script {
+                    def discordWebhookUrl = 'https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH'
+                    def message = """
+                    Build ${env.BUILD_NUMBER} is complete!
+                    Build status: ${currentBuild.currentResult}
+                    """
+                    bat "curl -X POST -H 'Content-Type: application/json' -d '{\"content\":\"${message}\"}' ${discordWebhookUrl}"
+                }
+            }
+        }
     }
     //Bagian post akan dijalankan setelah tahap-tahap selesai
 //     post {
@@ -34,4 +47,5 @@ pipeline {
 //             junit 'target/surefire-reports/**/*.xml'
 //         }
 //     }
+    
 }
