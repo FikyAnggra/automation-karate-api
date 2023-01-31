@@ -26,8 +26,8 @@ pipeline {
 //                 bat 'mvn test -Dtest=TestRunnerProearn'
                 script {
                     def result = readFile('target/karate-reports/karate-summary-json.txt')
-                    String testsRun = result.featurePassed
-                    echo testRun
+                    ded testsRun = result.featurePassed
+                    echo "testRun ${testRun}"
                 }
                 
                 discordSend description: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
