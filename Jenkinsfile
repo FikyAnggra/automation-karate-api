@@ -9,7 +9,7 @@ pipeline {
         stage('Clone repository') {
             steps {
                 # Menclone repository dari GitHub
-                git 'https://github.com/your-repository.git'
+                git 'https://github.com/FikyAnggra/automation-karate-api.git'
             }
         }
         //Tahap kedua bernama "Build"
