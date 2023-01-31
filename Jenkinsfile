@@ -23,7 +23,7 @@ pipeline {
         stage('Test') {
             steps {
                 //Menjalankan tes menggunakan Maven
-                sh 'mvn test -Dtest=KarateTest'
+                sh 'mvn test -Dtest=TestRunnerProearn'
             }
         }
     }
