@@ -26,7 +26,7 @@ pipeline {
 //                 bat 'mvn test -Dtest=TestRunnerProearn'
                 script {
                     def result = readFile('target/karate-reports/karate-summary-json.txt')
-                    def featuresPassed = result.split("\n").find { it.startsWith("featuresPassed") }
+                    def featuresPassed = result.find { it.startsWith("featuresPassed") }
                     echo "featuresPassed: ${featuresPassed}"
                       if (featuresPassed) {
                         featuresPassed = featuresPassed.split(':')[1].trim()
