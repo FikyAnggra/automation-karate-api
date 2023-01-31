@@ -26,7 +26,7 @@ pipeline {
 //                 bat 'mvn test -Dtest=TestRunnerProearn'
                 script {
                     def result = readFile('target/karate-reports/karate-summary-json.txt')
-                    def testsRun = result.featurePassed
+                    String testsRun = result.featurePassed
                     echo testRun
                 }
                 
