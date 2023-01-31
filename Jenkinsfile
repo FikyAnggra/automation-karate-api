@@ -15,7 +15,7 @@ pipeline {
         //Tahap kedua bernama "Build"
         stage('Build') {
             steps {
-                # Menjalankan perintah Maven untuk membangun proyek
+                //Menjalankan perintah Maven untuk membangun proyek
                 sh 'mvn clean install'
             }
         }
