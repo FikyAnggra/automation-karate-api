@@ -7,4 +7,5 @@ public class TestRunnerProearn {
     @Karate.Test
     Karate Regression() {
         return Karate.run().relativeTo(getClass());
+    }
 }
