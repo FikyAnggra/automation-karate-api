@@ -26,9 +26,13 @@ pipeline {
 //                 bat 'mvn test -Dtest=TestRunnerProearn'
                 script {
                     def result = readFile('target/karate-reports/karate-summary-json.txt')
-                    def jsonContent = readJSON text: result
-                    def featuresPassed = jsonContent.featuresPassed
-                    echo "testRun ${featuresPassed}"
+                    def featuresPassed = result.split("\n").find { it.startsWith("featuresPassed") }
+                      if (featuresPassed) {
+                        featuresPassed = featuresPassed.split(':')[1].trim()
+                      } else {
+                        featuresPassed = 'Tidak ditemukan'
+                      }
+                      echo "featuresPassed: ${featuresPassed}"
                 }
                 
                 discordSend description: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
