@@ -7,8 +7,10 @@ pipeline {
     stages {
         //Tahap pertama bernama "Clone repository"
         stage ('Clone Repository') {
-            checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/FikyAnggra/automation-karate-api.git']]])
-    }
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/FikyAnggra/automation-karate-api.git']]])
+            }
+        }
 
         //Tahap kedua bernama "Build"
 //         stage('Build') {
