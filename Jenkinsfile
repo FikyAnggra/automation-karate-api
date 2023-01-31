@@ -22,7 +22,7 @@ pipeline {
         //Tahap ketiga bernama "Test"
         stage('Test') {
             steps {
-                # Menjalankan tes menggunakan Maven
+                //Menjalankan tes menggunakan Maven
                 sh 'mvn test -Dtest=KarateTest'
             }
         }
