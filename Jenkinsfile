@@ -91,7 +91,7 @@ pipeline {
                     for (int i = 0; i < hasil.size(); i++) {
                         echo "result ke ${i} ${hasil[i]}" 
                         def subHasil = hasil[i].split(",")
-                        for (int j = 0; i < subHasil.size(); i++) {
+                        for (int j = 0; j < subHasil.size(); i++) {
                             echo "sub result ke ${j} ${subHasil[j]}" 
                         }
                     }
