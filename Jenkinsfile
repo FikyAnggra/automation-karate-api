@@ -95,7 +95,8 @@ pipeline {
                             echo "result terakhir ${hasil[i]}" 
                         } else {
                             for (int j = 0; j < subHasil.size(); j++) {
-                            echo "sub result ke ${j} ${subHasil[j]}" 
+                                echo "sub result ke ${j} ${subHasil[j]}" 
+                            }
                         }
                     }
                 
