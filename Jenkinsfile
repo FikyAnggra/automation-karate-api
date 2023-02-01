@@ -59,30 +59,31 @@ pipeline {
     post {
         always {
             script {
-                def xmlReport = readFile('target/surefire-reports/TEST-api.proearn.TestRunnerProearn.xml')
-                def report = new XmlSlurper().parseText(xmlReport)
+//                 def xmlReport = readFile('target/surefire-reports/TEST-api.proearn.TestRunnerProearn.xml')
+//                 def report = new XmlSlurper().parseText(xmlReport)
 
-                def elapsed = report.testsuite.@time
-                def threads = report.testsuite.@threads
-                def threadTime = report.testsuite.@time / report.testsuite.@threads
-                def features = report.testsuite.@tests
-                def skipped = report.testsuite.@skipped
-                def efficiency = report.testsuite.@tests / report.testsuite.@threads
-                def scenarios = report.testsuite.@tests
-                def passed = report.testsuite.@tests - report.testsuite.@failures
-                def failed = report.testsuite.@failures
+//                 def elapsed = report.testsuite.@time
+//                 def threads = report.testsuite.@threads
+//                 def threadTime = report.testsuite.@time / report.testsuite.@threads
+//                 def features = report.testsuite.@tests
+//                 def skipped = report.testsuite.@skipped
+//                 def efficiency = report.testsuite.@tests / report.testsuite.@threads
+//                 def scenarios = report.testsuite.@tests
+//                 def passed = report.testsuite.@tests - report.testsuite.@failures
+//                 def failed = report.testsuite.@failures
 
-                def content = 
-                    """
-                        Karate version: 1.1.0
-                        ======================================================
-                        elapsed: ${elapsed} | threads: ${threads}  | thread time: ${threadTime}
-                        features: ${features}   | skipped: ${skipped}  | efficiency: ${efficiency}
-                        scenarios: ${scenarios}  | passed: ${passed}  | failed: ${failed}
-                        ======================================================
-                    """
-                echo "result HTML ${content}"
+//                 def content = 
+//                     """
+//                         Karate version: 1.1.0
+//                         ======================================================
+//                         elapsed: ${elapsed} | threads: ${threads}  | thread time: ${threadTime}
+//                         features: ${features}   | skipped: ${skipped}  | efficiency: ${efficiency}
+//                         scenarios: ${scenarios}  | passed: ${passed}  | failed: ${failed}
+//                         ======================================================
+//                     """
+//                 echo "result HTML ${content}"
                     def result = readFile('target/surefire-reports/api.proearn.TestRunnerProearn.txt')
+                    def hasil = result.trim()
 //                     def resulthtml = readFile('target/karate-reports/karate-summary.html')
 //                 echo "result HTML ${resulthtml}"
 //                     discordSend description: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
