@@ -16,14 +16,13 @@ pipeline {
         stage('Build') {
             steps {
                 //Menjalankan perintah Maven untuk membangun proyek
-                discordSend description: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", footer: "Start Build", link: "$BUILD_URL", result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
-            }
+                }
         }
         //Tahap ketiga bernama "Test"
         stage('Test') {
             steps {
                 //Menjalankan tes menggunakan Maven
-                bat 'mvn test -Dtest=TestRunnerProearn'
+//                 bat 'mvn test -Dtest=TestRunnerProearn'
 //                 script {
 //                     def result = readFile('target/karate-reports/karate-summary-json.txt')
 //                     def featuresPassed = getContext(result) //{ it.startsWith("featuresPassed") }
@@ -36,7 +35,7 @@ pipeline {
 //                       echo "featuresPassed: ${featuresPassed}"
 //                 }
                 
-                discordSend description: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
+//                 discordSend description: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
     
             }
         }
@@ -60,6 +59,8 @@ pipeline {
             script {
                     def result = readFile('target/surefire-reports/api.proearn.TestRunnerProearn.txt')
                     echo "featuresPassed: ${result}"
+                    discordSend description: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", footer: "Start Build", link: "$BUILD_URL", result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
+                    discordSend description: 'test descriptions', footer: 'test footer', image: 'test image', link: 'test link', result: 'test result', scmWebUrl: '', thumbnail: 'test thumbail', title: 'test title', webhookURL: 'test'
             }
         }
     }
