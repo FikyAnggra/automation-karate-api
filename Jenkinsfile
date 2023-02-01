@@ -23,18 +23,18 @@ pipeline {
         stage('Test') {
             steps {
                 //Menjalankan tes menggunakan Maven
-//                 bat 'mvn test -Dtest=TestRunnerProearn'
-                script {
-                    def result = readFile('target/karate-reports/karate-summary-json.txt')
-                    def featuresPassed = getContext(result) //{ it.startsWith("featuresPassed") }
-                    echo "featuresPassed: ${featuresPassed}"
-                      if (featuresPassed) {
-                        featuresPassed = featuresPassed.split(':')[1].trim()
-                      } else {
-                        featuresPassed = 'Tidak ditemukan'
-                      }
-                      echo "featuresPassed: ${featuresPassed}"
-                }
+                bat 'mvn test -Dtest=TestRunnerProearn'
+//                 script {
+//                     def result = readFile('target/karate-reports/karate-summary-json.txt')
+//                     def featuresPassed = getContext(result) //{ it.startsWith("featuresPassed") }
+//                     echo "featuresPassed: ${featuresPassed}"
+//                       if (featuresPassed) {
+//                         featuresPassed = featuresPassed.split(':')[1].trim()
+//                       } else {
+//                         featuresPassed = 'Tidak ditemukan'
+//                       }
+//                       echo "featuresPassed: ${featuresPassed}"
+//                 }
                 
                 discordSend description: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
     
