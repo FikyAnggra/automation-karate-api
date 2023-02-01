@@ -91,12 +91,8 @@ pipeline {
                     for (int i = 0; i < hasil.size(); i++) {
                         echo "result ke ${i} ${hasil[i]}" 
                         def subHasil = hasil[i].split(",")
-                        if (hasil.size() - 1) {
-                            echo "result terakhir ${hasil[i]}" 
-                        } else {
-                            for (int j = 0; j < subHasil.size(); j++) {
+                        for (int j = 0; j < subHasil.size(); j++) {
                                 echo "sub result ke ${j} ${subHasil[j]}" 
-                            }
                         }
                     }
                 
