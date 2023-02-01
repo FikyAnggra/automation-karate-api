@@ -87,13 +87,10 @@ pipeline {
 //                     def hasil = result.split(",")
                
                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
-                def hasil = resulthtml.split("\\{")
-                     echo "${hasil[0]}"
-                echo "${hasil[1]}"
-                echo "${hasil[2]}"
-//                     for (int i = 0; i < hasil.size(); i++) {
-//                         echo "result ke ${i} ${hasil[i]}"
-//                     }
+                def hasil = resulthtml.split(/[\{\}\[\]]/)
+                    for (int i = 0; i < hasil.size(); i++) {
+                        echo "result ke ${i} ${hasil[i]}"
+                    }
                 
 //                     discordSend description: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
 //                     discordSend description: "${result}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
