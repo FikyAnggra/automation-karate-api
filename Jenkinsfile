@@ -89,13 +89,13 @@ pipeline {
                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
                     def hasil = resulthtml.split(/[\{\}\[\]]/)
                     def subhasil = hasil[hasil.size() - 1].split(",")
-                    def message = '''
+                    def message = """
                     ============================================================
                                        Automation Karate API
                                 ${subhasil[7]}
                     ============================================================
                     
-                    '''
+                    """
                     echo "${message}"
                     for (int i = 0; i < subhasil.size(); i++) {
                         echo "result ke ${i} = \n${subhasil[i]}"
