@@ -86,6 +86,7 @@ pipeline {
                     def hasil = result.split("\n")
                
 //                     def resulthtml = readFile('target/karate-reports/karate-summary.html')
+                echo "result HTML ${result}"
                 echo "result HTML ${hasil[0]}"
                 echo "result HTML ${hasil[1]}"
 //                     discordSend description: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
