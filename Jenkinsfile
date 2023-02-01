@@ -90,9 +90,10 @@ pipeline {
                     def hasil = resulthtml.split(/[\{\}\[\]]/)
                     def subhasil = hasil[hasil.size() - 1].split(",")
                     def message = '''
-                    ===============================
-                         Automation Karate API
-                    ===============================
+                    ============================================================
+                                       Automation Karate API
+                                ${subhasil[7]}
+                    ============================================================
                     
                     '''
                     echo "${message}"
