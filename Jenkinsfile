@@ -87,7 +87,7 @@ pipeline {
 //                     def hasil = result.split(",")
                
                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
-                    def hasil = resulthtml.split(",")
+                def hasil = resulthtml.split("\\{")
                      echo "${hasil[0]}"
                 echo "${hasil[1]}"
                 echo "${hasil[2]}"
