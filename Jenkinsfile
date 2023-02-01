@@ -61,7 +61,7 @@ pipeline {
             script {
                     def result = readFile('target/surefire-reports/api.proearn.TestRunnerProearn.txt')
                     echo "featuresPassed: ${result}"
-                    discordSend description: 'test descriptions', footer: 'test footer', image: 'test image', link: 'test link', result: 'test result', scmWebUrl: '', thumbnail: 'test thumbail', title: 'test title', webhookURL: 'test'
+                    discordSend description: 'test descriptions', footer: 'test footer', image: 'test image', link: 'test link', result: 'test result', scmWebUrl: '', thumbnail: 'test thumbail', title: 'test title', webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
             }
         }
     }
