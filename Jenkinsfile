@@ -93,8 +93,10 @@ pipeline {
                     ============================================================
                                        Automation Karate API
                                 ${subhasil[7]}
+                                       ${subhasil[4]}
                     ============================================================
-                    
+                    ${subhasil[2]} | ${subhasil[3]} | ${subhasil[6]}
+                    ${subhasil[8]} | ${subhasil[10]}
                     """
                     echo "${message}"
                     for (int i = 0; i < subhasil.size(); i++) {
