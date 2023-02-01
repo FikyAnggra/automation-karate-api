@@ -55,6 +55,14 @@ pipeline {
 //             }
 //         }
     }
+    post {
+        always {
+            script {
+                    def result = readFile('target/surefire-reports/api.proearn.TestRunnerProearn.txt')
+                    echo "featuresPassed: ${result}"
+            }
+        }
+    }
     //Bagian post akan dijalankan setelah tahap-tahap selesai
 //     post {
 //         //Menambahkan hasil tes JUnit ke Jenkins
