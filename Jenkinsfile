@@ -59,7 +59,7 @@ pipeline {
     post {
         always {
             script {
-                def xmlReport = readFile('target/surefire-reports/TEST-*.xml')
+                def xmlReport = readFile('target/surefire-reports/TEST-api.proearn.TestRunnerProearn.xml')
                 def report = new XmlSlurper().parseText(xmlReport)
 
                 def elapsed = report.testsuite.@time
