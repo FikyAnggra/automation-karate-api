@@ -95,6 +95,7 @@ pipeline {
                     ===============================
                     
                     '''
+                    echo "${message}"
                     for (int i = 0; i < subhasil.size(); i++) {
                         echo "result ke ${i} = \n${subhasil[i]}"
                     }
