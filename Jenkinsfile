@@ -83,7 +83,7 @@ pipeline {
 //                     """
 //                 echo "result HTML ${content}"
                     def result = readFile('target/surefire-reports/api.proearn.TestRunnerProearn.txt')
-                    def hasil = result.split("\n")
+                    def hasil = result.split(",")
                
 //                     def resulthtml = readFile('target/karate-reports/karate-summary.html')
                 echo "result HTML ${result}"
