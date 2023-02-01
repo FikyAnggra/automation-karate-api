@@ -88,9 +88,9 @@ pipeline {
                
                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
                     def hasil = resulthtml.split(/[\{\}\[\]]/)
-                    for (int i = 0; i < hasil.size(); i++) {
+                    for (int i = 1; i < hasil.size(); i++) {
                         def hasilSplit = hasil[i].split(",")
-                        echo "result ke ${i} ${hasil[i]}"
+                        echo "result split ke ${i} ${hasil[i]}"
                         echo "result ke ${i} ${hasilSplit[i]}"
                     }
                 
