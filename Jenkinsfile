@@ -111,7 +111,7 @@ pipeline {
 //                         new groovy.json.JsonSlurperClassic().parseText(json)
 //                     }
 //                     def config =  jsonParse(readFile('target/karate-reports/karate-summary-json.txt'))
-                    def jsonSlup = new groovy.json.JsonSlurperClassic().parseText(resulthtml)
+                    def jsonSlup = new groovy.json.JsonSlurper().parseText(resulthtml)
                     def featuresPassed = config.featuresPassed
                     def featuresFailed = config.featuresFailed
                     def totalTime = config.totalTime
