@@ -98,30 +98,30 @@ pipeline {
 //                     ${subhasil[2]} | ${subhasil[3]} | ${subhasil[6]}
 //                     ${subhasil[8]} | ${subhasil[10]}
 //                     """
-                    def hasil = resulthtml.split(/[\{\}\[\]]/)
+                def hasil = resulthtml.split(/[\{\}\[{\}],\},\[\]]/)
                     for (int i = 0; i < hasil.size(); i++) {
                         def subhasil = hasil[i].split(",")
-                        def message = 
-                            """
-                            ============================================================
-                                               Automation Karate API
-                            ============================================================
-                            ${subhasil[0]}
-                            ${subhasil[1]}
-                            ${subhasil[2]}
-                            ${subhasil[3]}
-                            ${subhasil[4]}
-                            ${subhasil[5]}
-                            ${subhasil[6]}
-                            ${subhasil[7]}
-                            ${subhasil[8]}
-                            ============================================================
-                            """
-                        echo "result ke ${i} \n${message}" 
-//                         echo "result ke ${i} ${hasil[i]}" 
-//                         for (int j = 0; j < subhasil.size(); j++) {
-//                                 echo "sub result ke ${j} ${subhasil[j]}" 
-//                         }
+//                         def message = 
+//                             """
+//                             ============================================================
+//                                                Automation Karate API
+//                             ============================================================
+//                             ${subhasil[0]}
+//                             ${subhasil[1]}
+//                             ${subhasil[2]}
+//                             ${subhasil[3]}
+//                             ${subhasil[4]}
+//                             ${subhasil[5]}
+//                             ${subhasil[6]}
+//                             ${subhasil[7]}
+//                             ${subhasil[8]}
+//                             ============================================================
+//                             """
+//                         echo "result ke ${i} \n${message}" 
+                        echo "result ke ${i} ${hasil[i]}" 
+                        for (int j = 0; j < subhasil.size(); j++) {
+                                echo "sub result ke ${j} ${subhasil[j]}" 
+                        }
                     }
                 
 //                     discordSend description: "${message}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
