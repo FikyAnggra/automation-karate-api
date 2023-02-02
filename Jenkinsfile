@@ -15,7 +15,7 @@ pipeline {
         stage('Test') {
             steps {
                 //Menjalankan tes menggunakan Maven
-                //bat 'mvn test -Dtest=TestRunnerProearn'
+                bat 'mvn test -Dtest=TestRunnerProearn'
                 echo "test"
             }
         }
@@ -219,12 +219,4 @@ pipeline {
             }
         }
     }
-    //Bagian post akan dijalankan setelah tahap-tahap selesai
-//     post {
-//         //Menambahkan hasil tes JUnit ke Jenkins
-//         always {
-//             junit 'target/surefire-reports/**/*.xml'
-//         }
-//     }
-    
 }
