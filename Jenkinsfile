@@ -105,25 +105,25 @@ pipeline {
 //                 def value = $(echo $resulthtml | jq '.featuresPassed')
 //                 echo "Value: $value"
                 
-//                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
-                    def jsonParse(def json) {
-                        new groovy.json.JsonSlurperClassic().parseText(json)
-                    }
-                    def config =  jsonParse(readFile('target/karate-reports/karate-summary-json.txt'))
-//                     def jsonSlup = new groovy.json.JsonSlurperClassic().parseText(resulthtml)
-                    def featuresPassed = config.featuresPassed
-                    def featuresFailed = config.featuresFailed
-                    def totalTime = config.totalTime
-                    def featuresSkipped = config.featuresSkipped
-                    def resultDate = config.resultDate
-                    def scenariosPassed = config.scenariosPassed
-                    def scenariosFailed = config.scenariosfailed
-                    def featureSummary = config.featureSummary
-                    def durationMillis = config.featureSummary.durationMillis
-                    def name = config.featureSummary.name
-                    def scenarioCount = config.featureSummary.scenarioCount
-                    def passedCount = config.featureSummary.passedCount
-                    def failedCount = config.featureSummary.failedCount
+                    def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
+//                     def jsonParse(def json) {
+//                         new groovy.json.JsonSlurperClassic().parseText(json)
+//                     }
+//                     def config =  jsonParse(readFile('target/karate-reports/karate-summary-json.txt'))
+                    def jsonSlup = new groovy.json.JsonSlurperClassic().parseText(resulthtml)
+                    def featuresPassed = jsonSlup.featuresPassed
+                    def featuresFailed = jsonSlup.featuresFailed
+                    def totalTime = jsonSlup.totalTime
+                    def featuresSkipped = jsonSlup.featuresSkipped
+                    def resultDate = jsonSlup.resultDate
+                    def scenariosPassed = jsonSlup.scenariosPassed
+                    def scenariosFailed = jsonSlup.scenariosfailed
+                    def featureSummary = jsonSlup.featureSummary
+                    def durationMillis = jsonSlup.featureSummary.durationMillis
+                    def name = jsonSlup.featureSummary.name
+                    def scenarioCount = jsonSlup.featureSummary.scenarioCount
+                    def passedCount = jsonSlup.featureSummary.passedCount
+                    def failedCount = jsonSlup.featureSummary.failedCount
                     
 //                     def failed = json.featureSummary.failed
                     for (int i = 0; i < featureSummary.size(); i++) {
