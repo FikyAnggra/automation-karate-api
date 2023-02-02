@@ -37,8 +37,8 @@ pipeline {
 //                       echo "featuresPassed: ${featuresPassed}"
 //                 }
                 echo 'test'
-                    def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
-                    def json = new groovy.json.JsonSlurper().parseText(resulthtml)
+                    def resultjson = readFile('target/karate-reports/karate-summary-json.txt')
+                    def json = new groovy.json.JsonSlurper().parseText(resultjson)
                     def featuresPassed = json.featuresPassed
                     def featuresFailed = json.featuresFailed
                     def totalTime = json.totalTime
