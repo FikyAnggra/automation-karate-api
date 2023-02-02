@@ -86,7 +86,7 @@ pipeline {
 //                     def result = readFile('target/surefire-reports/api.proearn.TestRunnerProearn.txt')
 // //                     def hasil = result.split(",")
                
-                    def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
+//                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
 //                     def hasil = resulthtml.split(/[\{\}\[\]]/)
 //                     def subhasil = hasil[hasil.size() - 1].split(",")
 //                     def message = """
@@ -98,9 +98,9 @@ pipeline {
 //                     ${subhasil[2]} | ${subhasil[3]} | ${subhasil[6]}
 //                     ${subhasil[8]} | ${subhasil[10]}
 //                     """
-                def hasil = resulthtml.split(/[\{\}\[\]\[{\},{\}],]/)
-                    for (int i = 0; i < hasil.size(); i++) {
-                        def subhasil = hasil[i].split(",")
+//                 def hasil = resulthtml.split(/[\{\}\[\]\[{\},{\}],]/)
+//                     for (int i = 0; i < hasil.size(); i++) {
+//                         def subhasil = hasil[i].split(",")
 //                         def message = 
 //                             """
 //                             ============================================================
@@ -118,11 +118,25 @@ pipeline {
 //                             ============================================================
 //                             """
 //                         echo "result ke ${i} \n${message}" 
-                        echo "result ke ${i} ${hasil[i]}" 
+//                         echo "result ke ${i} ${hasil[i]}" 
 //                         for (int j = 0; j < subhasil.size(); j++) {
 //                                 echo "sub result ke ${j} ${subhasil[j]}" 
 //                         }
-                    }
+//                     }
+                
+//                 def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
+//                 def value = $(echo $resulthtml | jq '.featuresPassed')
+//                 echo "Value: $value"
+                
+                
+                //Read JSON data from file.txt
+                data=$(cat target/karate-reports/karate-summary-json.txt)
+
+                //Parse JSON data using jq
+                value=$(echo $data | jq '.featuresPassed')
+
+                //Print the value
+                echo "Value: $value"
                 
 //                     discordSend description: "${message}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
 //                     discordSend description: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
