@@ -24,7 +24,7 @@ pipeline {
         stage('Test') {
             steps {
                 //Menjalankan tes menggunakan Maven
-//                 bat 'mvn test -Dtest=TestRunnerProearn'
+                bat 'mvn test -Dtest=TestRunnerProearn'
 //                 script {
 //                     def result = readFile('target/karate-reports/karate-summary-json.txt')
 //                     def featuresPassed = getContext(result) //{ it.startsWith("featuresPassed") }
@@ -128,7 +128,7 @@ pipeline {
                             Scenario Failed     = ${scenariosfailed}
                             ============================================================
                             """
-//                     discordSend description: "${messageAllFeature}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
+                    discordSend description: "${messageAllFeature}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
                     def featureSummary = json.featureSummary
                     def durationMillis = json.featureSummary.durationMillis
                     def name = json.featureSummary.name
@@ -136,7 +136,6 @@ pipeline {
                     def passedCount = json.featureSummary.passedCount
                     def failedCount = json.featureSummary.failedCount
                     def failed = json.featureSummary.failed
-                    discordSend description: "${messageAllFeature}", footer: "", link: "$BUILD_URL", result: , title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
                     for (int i = 0; i < featureSummary.size(); i++) {
                         def messageScenario = 
                             """
@@ -152,7 +151,7 @@ pipeline {
                             ============================================================
                             """
                         echo "${messageScenario}"
-//                         discordSend description: "${messageScenario}", footer: "", link: "$BUILD_URL", result: "Failed ${failed[i]}", title: "Feature ${name[i]}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
+                        discordSend description: "${messageScenario}", footer: "", link: "$BUILD_URL", result: "Failed ${failed[i]}", title: "Feature ${name[i]}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
                     }
                     
                 
