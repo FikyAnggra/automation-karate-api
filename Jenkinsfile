@@ -24,7 +24,7 @@ pipeline {
         stage('Test') {
             steps {
                 //Menjalankan tes menggunakan Maven
-//                 bat 'mvn test -Dtest=TestRunnerProearn'
+                bat 'mvn test -Dtest=TestRunnerProearn'
 //                 script {
 //                     def result = readFile('target/karate-reports/karate-summary-json.txt')
 //                     def featuresPassed = getContext(result) //{ it.startsWith("featuresPassed") }
