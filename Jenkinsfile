@@ -112,7 +112,9 @@ pipeline {
                 
                 
                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
-                    def json = new groovy.json.JsonSlurper().parseText(resulthtml)
+                    def jsonSlupper = new JsonSlupper()
+                    def json = jsonSlupper.parseText(resulthtml)
+//                     def json = new groovy.json.JsonSlurper().parseText(resulthtml)
                     def featuresPassed = json.featuresPassed
                     def featuresFailed = json.featuresFailed
                     def totalTime = json.totalTime
@@ -121,12 +123,12 @@ pipeline {
                     def scenariosPassed = json.scenariosPassed
                     def scenariosFailed = json.scenariosfailed
                     
-//                     def featureSummary = json.featureSummary
-//                     def durationMillis = json.featureSummary.durationMillis
-//                     def name = json.featureSummary.name
-//                     def scenarioCount = json.featureSummary.scenarioCount
-//                     def passedCount = json.featureSummary.passedCount
-//                     def failedCount = json.featureSummary.failedCount
+                    def featureSummary = json.featureSummary
+                    def durationMillis = json.featureSummary.durationMillis
+                    def name = json.featureSummary.name
+                    def scenarioCount = json.featureSummary.scenarioCount
+                    def passedCount = json.featureSummary.passedCount
+                    def failedCount = json.featureSummary.failedCount
                     def messageAllFeature = 
                                 """
                                 ============================================================
@@ -164,26 +166,26 @@ pipeline {
               
                     
 //                     def failed = json.featureSummary.failed
-//                     for (int i = 0; i < featureSummary.size(); i++) {
+                    for (int i = 0; i < featureSummary.size(); i++) {
                         
-//                         def messageScenario = 
-//                             """
-//                             ============================================================
-//                                                Automation Karate API
-//                                                   Feature Summary
-//                             ============================================================
-//                             Feature Name        = ${name[i]} 
-//                             Running Time        = ${durationMillis[i]} m/s
-//                             Total Scenario      = ${scenarioCount[i]}
-//                             Scenario Passed     = ${passedCount[i]}
-//                             Scenario Failed     = ${failedCount[i]}
-//                             ============================================================
-//                             """
-// //                         echo "${messageScenario}"
-// //                         discordSend webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
-//                         discordSend description: "${messageScenario}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
+                        def messageScenario = 
+                            """
+                            ============================================================
+                                               Automation Karate API
+                                                  Feature Summary
+                            ============================================================
+                            Feature Name        = ${name[i]} 
+                            Running Time        = ${durationMillis[i]} m/s
+                            Total Scenario      = ${scenarioCount[i]}
+                            Scenario Passed     = ${passedCount[i]}
+                            Scenario Failed     = ${failedCount[i]}
+                            ============================================================
+                            """
+//                         echo "${messageScenario}"
+//                         discordSend webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
+                        discordSend description: "${messageScenario}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
                     
-//                     }
+                    }
                     
 //                     discordSend description: "${message}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
 //                     discordSend description: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
