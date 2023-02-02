@@ -100,12 +100,13 @@ pipeline {
 //                     """
                     def hasil = resulthtml.split(/[\{\}\[\]]/)
                     for (int i = 0; i < hasil.size(); i++) {
-                        def subHasil = hasil[i].split(",")
+                        def subhasil = hasil[i].split(",")
                         def message = 
                             """
                             ============================================================
                                                Automation Karate API
                             ============================================================
+                            ${subhasil[0]}
                             ${subhasil[1]}
                             ${subhasil[2]}
                             ${subhasil[3]}
@@ -116,9 +117,10 @@ pipeline {
                             ${subhasil[8]}
                             ============================================================
                             """
+                        echo "result ke ${i} \n${message}" 
 //                         echo "result ke ${i} ${hasil[i]}" 
-//                         for (int j = 0; j < subHasil.size(); j++) {
-//                                 echo "sub result ke ${j} ${subHasil[j]}" 
+//                         for (int j = 0; j < subhasil.size(); j++) {
+//                                 echo "sub result ke ${j} ${subhasil[j]}" 
 //                         }
                     }
                 
