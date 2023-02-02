@@ -60,34 +60,11 @@ pipeline {
     post {
         always {
             script {
-//                 def xmlReport = readFile('target/surefire-reports/TEST-api.proearn.TestRunnerProearn.xml')
-//                 def report = new XmlSlurper().parseText(xmlReport)
-
-//                 def elapsed = report.testsuite.@time
-//                 def threads = report.testsuite.@threads
-//                 def threadTime = report.testsuite.@time / report.testsuite.@threads
-//                 def features = report.testsuite.@tests
-//                 def skipped = report.testsuite.@skipped
-//                 def efficiency = report.testsuite.@tests / report.testsuite.@threads
-//                 def scenarios = report.testsuite.@tests
-//                 def passed = report.testsuite.@tests - report.testsuite.@failures
-//                 def failed = report.testsuite.@failures
-
-//                 def content = 
-//                     """
-//                         Karate version: 1.1.0
-//                         ======================================================
-//                         elapsed: ${elapsed} | threads: ${threads}  | thread time: ${threadTime}
-//                         features: ${features}   | skipped: ${skipped}  | efficiency: ${efficiency}
-//                         scenarios: ${scenarios}  | passed: ${passed}  | failed: ${failed}
-//                         ======================================================
-//                     """
-//                 echo "result HTML ${content}"
 //                     def result = readFile('target/surefire-reports/api.proearn.TestRunnerProearn.txt')
-// //                     def hasil = result.split(",")
+// //                   def hasil = result.split(",")
                
 //                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
-//                     def hasil = resulthtml.split(/[\{\}\[\]]/)
+                    def hasil = resulthtml.split(/[\{\}\[\]]/)
 //                     def subhasil = hasil[hasil.size() - 1].split(",")
 //                     def message = """
 //                     ============================================================
