@@ -107,14 +107,36 @@ pipeline {
                 
                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
                     def json = new groovy.json.JsonSlurper().parseText(resulthtml)
-                    def value = json.featureSummary
-                    for (int i = 0; i < value.size(); i++) {
-                        def valueName = json.featureSummary.name
-                        def valueScenario = json.featureSummary.scenarioCount
-                        echo "Value: ${value[i]}"
-                        echo "Value: ${valueName[i]}"
-                        echo "Value: ${valueScenario[i]}"
-                    }
+                    def featuresPassed = json.featuresPassed
+                    def featuresFailed = json.featuresFailed
+                    def totalTime = json.totalTime
+                    def featuresSkipped = json.featuresSkipped
+                    def resultDate = json.resultDate
+                    def scenariosPassed = json.scenariosPassed
+                    def scenariosfailed = json.scenariosfailed
+                    def messageAllFeature = 
+                            """
+                            ============================================================
+                                               Automation Karate API
+                            ============================================================
+                            Running Date        = ${resultDate}
+                            Total Running Time  = ${totalTime}
+                            Feature Passed      = ${featuresPassed}
+                            Feature Skipped     = ${featuresSkipped}
+                            Feature Failed      = ${featuresFailed}
+                            Scenario Passed     = ${scenariosPassed}
+                            Scenario Failed     = ${scenariosfailed}
+                            ============================================================
+                            """
+                    echo "${messageAllFeature}"
+//                     def value = json.featureSummary
+//                     for (int i = 0; i < value.size(); i++) {
+//                         def valueName = json.featureSummary.name
+//                         def valueScenario = json.featureSummary.scenarioCount
+//                         echo "Value: ${value[i]}"
+//                         echo "Value: ${valueName[i]}"
+//                         echo "Value: ${valueScenario[i]}"
+//                     }
                     
                 
 //                     discordSend description: "${message}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
