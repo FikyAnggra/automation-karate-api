@@ -37,6 +37,31 @@ pipeline {
 //                       echo "featuresPassed: ${featuresPassed}"
 //                 }
                 echo 'test'
+                    def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
+                    def json = new groovy.json.JsonSlurper().parseText(resulthtml)
+                    def featuresPassed = json.featuresPassed
+                    def featuresFailed = json.featuresFailed
+                    def totalTime = json.totalTime
+                    def featuresSkipped = json.featuresSkipped
+                    def resultDate = json.resultDate
+                    def scenariosPassed = json.scenariosPassed
+                    def scenariosFailed = json.scenariosfailed
+                    def messageAllFeature = 
+                                """
+                                ============================================================
+                                                   Automation Karate API
+                                ============================================================
+                                Running Date        = ${resultDate} 
+                                Total Running Time  = ${totalTime} m/s
+                                Feature Passed      = ${featuresPassed}
+                                Feature Skipped     = ${featuresSkipped}
+                                Feature Failed      = ${featuresFailed}
+                                Scenario Passed     = ${scenariosPassed}
+                                Scenario Failed     = ${scenariosFailed}
+                                ============================================================
+                                """
+                    discordSend description: "${messageAllFeature}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
+                    
 //                 discordSend description: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
                 
     
@@ -106,39 +131,13 @@ pipeline {
 //                 echo "Value: $value"
                 
                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
-//                     def jsonParse(def json) {
-//                         new groovy.json.JsonSlurperClassic().parseText(json)
-//                     }
-//                     def config =  jsonParse(readFile('target/karate-reports/karate-summary-json.txt'))
                     def json = new groovy.json.JsonSlurper().parseText(resulthtml)
-                    def featuresPassed = json.featuresPassed
-                    def featuresFailed = json.featuresFailed
-                    def totalTime = json.totalTime
-                    def featuresSkipped = json.featuresSkipped
-                    def resultDate = json.resultDate
-                    def scenariosPassed = json.scenariosPassed
-                    def scenariosFailed = json.scenariosfailed
                     def featureSummary = json.featureSummary
                     def durationMillis = json.featureSummary.durationMillis
                     def name = json.featureSummary.name
                     def scenarioCount = json.featureSummary.scenarioCount
                     def passedCount = json.featureSummary.passedCount
                     def failedCount = json.featureSummary.failedCount
-                    def messageAllFeature = 
-                                """
-                                ============================================================
-                                                   Automation Karate API
-                                ============================================================
-                                Running Date        = ${resultDate} 
-                                Total Running Time  = ${totalTime} m/s
-                                Feature Passed      = ${featuresPassed}
-                                Feature Skipped     = ${featuresSkipped}
-                                Feature Failed      = ${featuresFailed}
-                                Scenario Passed     = ${scenariosPassed}
-                                Scenario Failed     = ${scenariosFailed}
-                                ============================================================
-                                """
-                    discordSend description: "${messageAllFeature}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
                     def messageScenario = 
                             """
                             ============================================================
