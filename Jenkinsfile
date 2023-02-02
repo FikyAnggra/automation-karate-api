@@ -70,10 +70,10 @@ pipeline {
                 
                 
                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt').toString()
-                    def json = new groovy.json.JsonSlurper().parseText(resulthtml)
-                json.lazyMap { object, index ->
-                    def nama = object.featureSummary
-                    discordSend description: "${messageScenario}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
+                    def json = new groovy.json.JsonSlurperClassic().parseText(resulthtml)
+                for (int i = 0; i < json.size(); i++) {
+                    def nama = json.featureSummary[i]
+                    discordSend description: "${nama}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
                 }
 //                     json.each { object ->
 // //                         def featureSummary = object.featureSummary
