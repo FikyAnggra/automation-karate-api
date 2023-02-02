@@ -98,7 +98,7 @@ pipeline {
 //                     ${subhasil[2]} | ${subhasil[3]} | ${subhasil[6]}
 //                     ${subhasil[8]} | ${subhasil[10]}
 //                     """
-                def hasil = resulthtml.split(/[\{\}\[\]]/)
+                def hasil = resulthtml.split(/[\{\}\[\]\[{\},{\}],]/)
                     for (int i = 0; i < hasil.size(); i++) {
                         def subhasil = hasil[i].split(",")
 //                         def message = 
