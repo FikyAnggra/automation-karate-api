@@ -64,7 +64,7 @@ pipeline {
 // //                   def hasil = result.split(",")
                
 //                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
-                    def hasil = resulthtml.split(/[\{\}\[\]]/)
+//                     def hasil = resulthtml.split(/[\{\}\[\]]/)
 //                     def subhasil = hasil[hasil.size() - 1].split(",")
 //                     def message = """
 //                     ============================================================
