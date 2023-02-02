@@ -113,7 +113,7 @@ pipeline {
                     def featuresSkipped = json.featuresSkipped
                     def resultDate = json.resultDate
                     def scenariosPassed = json.scenariosPassed
-                    def scenariosfailed = json.scenariosfailed
+                    def scenariosFailed = json.scenariosfailed
                     def featureSummary = json.featureSummary
                     def durationMillis = json.featureSummary.durationMillis
                     def name = json.featureSummary.name
