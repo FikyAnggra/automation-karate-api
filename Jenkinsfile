@@ -107,9 +107,11 @@ pipeline {
                 
                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
                     def json = new groovy.json.JsonSlurper().parseText(resulthtml)
-                    def value = json.featureSummary
-                    echo "Value: ${value.size()}"
-                    echo "Value: ${value[1]}"
+                    def value = json.featureSummary.name
+                    for (int i = 0; i < value.size(); i++) {
+                        echo "Value: ${value[i]}"
+                    }
+                    
                 
 //                     discordSend description: "${message}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
 //                     discordSend description: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
