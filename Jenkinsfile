@@ -112,8 +112,8 @@ pipeline {
                 
                 
                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
-                   
-//                     def json = new groovy.json.JsonSlurper().parseText(resulthtml)
+                    def json = new groovy.json.JsonSlurper().parseText(resulthtml)
+
 //                     def featuresPassed = json.featuresPassed
 //                     def featuresFailed = json.featuresFailed
 //                     def totalTime = json.totalTime
