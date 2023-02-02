@@ -113,6 +113,28 @@ pipeline {
                 
                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
                     def json = new groovy.json.JsonSlurper().parseText(resulthtml)
+                    json.each { object ->
+                        def featureSummary = object.featureSummary
+                        def durationMillis = object.featureSummary.durationMillis
+                        def name = object.featureSummary.name
+                        def scenarioCount = object.featureSummary.scenarioCount
+                        def passedCount = object.featureSummary.passedCount
+                        def failedCount = object.featureSummary.failedCount
+                          def messageScenario = 
+                                """
+                                ============================================================
+                                                   Automation Karate API
+                                                      Feature Summary
+                                ============================================================
+                                Feature Name        = ${name} 
+                                Running Time        = ${durationMillis} m/s
+                                Total Scenario      = ${scenarioCount}
+                                Scenario Passed     = ${passedCount}
+                                Scenario Failed     = ${failedCount}
+                                ============================================================
+                                """
+                        discordSend description: "${messageScenario}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
+                    }
 
 //                     def featuresPassed = json.featuresPassed
 //                     def featuresFailed = json.featuresFailed
@@ -160,28 +182,7 @@ pipeline {
 //                     discordSend description: "${messageScenario}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
                     
                
-                json.each { object ->
-                    def featureSummary = object.featureSummary
-                    def durationMillis = object.featureSummary.durationMillis
-                    def name = object.featureSummary.name
-                    def scenarioCount = object.featureSummary.scenarioCount
-                    def passedCount = object.featureSummary.passedCount
-                    def failedCount = object.featureSummary.failedCount
-                      def messageScenario = 
-                            """
-                            ============================================================
-                                               Automation Karate API
-                                                  Feature Summary
-                            ============================================================
-                            Feature Name        = ${name} 
-                            Running Time        = ${durationMillis} m/s
-                            Total Scenario      = ${scenarioCount}
-                            Scenario Passed     = ${passedCount}
-                            Scenario Failed     = ${failedCount}
-                            ============================================================
-                            """
-                    discordSend description: "${messageScenario}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
-                }
+                
                 
                 
               
