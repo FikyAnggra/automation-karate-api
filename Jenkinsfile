@@ -110,20 +110,20 @@ pipeline {
 //                         new groovy.json.JsonSlurperClassic().parseText(json)
 //                     }
 //                     def config =  jsonParse(readFile('target/karate-reports/karate-summary-json.txt'))
-                    def jsonSlup = new groovy.json.JsonSlurperClassic().parseText(resulthtml)
-                    def featuresPassed = jsonSlup.featuresPassed
-                    def featuresFailed = jsonSlup.featuresFailed
-                    def totalTime = jsonSlup.totalTime
-                    def featuresSkipped = jsonSlup.featuresSkipped
-                    def resultDate = jsonSlup.resultDate
-                    def scenariosPassed = jsonSlup.scenariosPassed
-                    def scenariosFailed = jsonSlup.scenariosfailed
-                    def featureSummary = jsonSlup.featureSummary
-                    def durationMillis = jsonSlup.featureSummary.durationMillis
-                    def name = jsonSlup.featureSummary.name
-                    def scenarioCount = jsonSlup.featureSummary.scenarioCount
-                    def passedCount = jsonSlup.featureSummary.passedCount
-                    def failedCount = jsonSlup.featureSummary.failedCount
+                    def json = new groovy.json.JsonSlurper().parseText(resulthtml)
+                    def featuresPassed = json.featuresPassed
+                    def featuresFailed = json.featuresFailed
+                    def totalTime = json.totalTime
+                    def featuresSkipped = json.featuresSkipped
+                    def resultDate = json.resultDate
+                    def scenariosPassed = json.scenariosPassed
+                    def scenariosFailed = json.scenariosfailed
+                    def featureSummary = json.featureSummary
+                    def durationMillis = json.featureSummary.durationMillis
+                    def name = json.featureSummary.name
+                    def scenarioCount = json.featureSummary.scenarioCount
+                    def passedCount = json.featureSummary.passedCount
+                    def failedCount = json.featureSummary.failedCount
                     
 //                     def failed = json.featureSummary.failed
                     for (int i = 0; i < featureSummary.size(); i++) {
