@@ -107,9 +107,13 @@ pipeline {
                 
                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
                     def json = new groovy.json.JsonSlurper().parseText(resulthtml)
-                    def value = json.featureSummary.name
+                    def value = json.featureSummary
                     for (int i = 0; i < value.size(); i++) {
+                        def valueName = json.featureSummary.name
+                        def valueScenario = json.featureSummary.scenarioCount
                         echo "Value: ${value[i]}"
+                        echo "Value: ${valueName[i]}"
+                        echo "Value: ${valueScenario[i]}"
                     }
                     
                 
