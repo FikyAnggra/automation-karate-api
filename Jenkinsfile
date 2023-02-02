@@ -106,7 +106,6 @@ pipeline {
 //                 echo "Value: $value"
                 
 //                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
-                    @NonCPS
                     def jsonParse(def json) {
                         new groovy.json.JsonSlurperClassic().parseText(json)
                     }
