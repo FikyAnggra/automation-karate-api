@@ -150,7 +150,7 @@ pipeline {
                             Scenario Failed     = ${failedCount[i]}
                             ============================================================
                             """
-                        echo '${messageScenario}' 
+                        echo "${messageScenario}"
 //                         discordSend description: "${messageScenario}", footer: "", link: "$BUILD_URL", result: "Failed ${failed[i]}", title: "Feature ${name[i]}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
                     }
                     
