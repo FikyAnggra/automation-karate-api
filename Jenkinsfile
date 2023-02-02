@@ -105,24 +105,30 @@ pipeline {
 //                 def value = $(echo $resulthtml | jq '.featuresPassed')
 //                 echo "Value: $value"
                 
-                    def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
-                    def json = new groovy.json.JsonSlurper().parseText(resulthtml)
-                    def featuresPassed = json.featuresPassed
-                    def featuresFailed = json.featuresFailed
-                    def totalTime = json.totalTime
-                    def featuresSkipped = json.featuresSkipped
-                    def resultDate = json.resultDate
-                    def scenariosPassed = json.scenariosPassed
-                    def scenariosFailed = json.scenariosfailed
-                    def featureSummary = json.featureSummary
+//                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
+                    @NonCPS
+                    def jsonParse(def json) {
+                        new groovy.json.JsonSlurperClassic().parseText(json)
+                    }
+                    def config =  jsonParse(readFile('target/karate-reports/karate-summary-json.txt'))
+//                     def jsonSlup = new groovy.json.JsonSlurper().parseText(resulthtml)
+                    def featuresPassed = config.featuresPassed
+                    def featuresFailed = config.featuresFailed
+                    def totalTime = config.totalTime
+                    def featuresSkipped = config.featuresSkipped
+                    def resultDate = config.resultDate
+                    def scenariosPassed = config.scenariosPassed
+                    def scenariosFailed = config.scenariosfailed
+                    def featureSummary = config.featureSummary
+                    def durationMillis = config.featureSummary.durationMillis
+                    def name = config.featureSummary.name
+                    def scenarioCount = config.featureSummary.scenarioCount
+                    def passedCount = config.featureSummary.passedCount
+                    def failedCount = config.featureSummary.failedCount
                     
 //                     def failed = json.featureSummary.failed
                     for (int i = 0; i < featureSummary.size(); i++) {
-                        def durationMillis = json.featureSummary.durationMillis
-                        def name = json.featureSummary.name
-                        def scenarioCount = json.featureSummary.scenarioCount
-                        def passedCount = json.featureSummary.passedCount
-                        def failedCount = json.featureSummary.failedCount
+                        
                         def messageScenario = 
                             """
                             ============================================================
@@ -156,7 +162,7 @@ pipeline {
                             ============================================================
                             """
 //                        echo "${messageAllFeature}"
-//                     discordSend description: "${messageAllFeature}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
+                    discordSend description: "${messageAllFeature}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
                     
                     
                 
