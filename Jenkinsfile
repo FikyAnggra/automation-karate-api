@@ -128,16 +128,10 @@ pipeline {
 //                 def value = $(echo $resulthtml | jq '.featuresPassed')
 //                 echo "Value: $value"
                 
-                
-                //Read JSON data from file.txt
-                def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
-                data=$(cat ${resulthtml})
-
-                //Parse JSON data using jq
-                value=$(echo $data | jq '.featuresPassed')
-
-                //Print the value
-                echo "Value: $value"
+                    def resulthtml = readFile('target/karate-reports/karate-summary-json.txt').text.trim()
+                    def json = new groovy.json.JsonSlurper().parseText(resulthtml)
+                    def value = json.featuresPassed
+                    echo "Value: ${value}"
                 
 //                     discordSend description: "${message}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
 //                     discordSend description: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
