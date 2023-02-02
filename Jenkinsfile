@@ -128,7 +128,7 @@ pipeline {
 //                 def value = $(echo $resulthtml | jq '.featuresPassed')
 //                 echo "Value: $value"
                 
-                    def resulthtml = readFile('target/karate-reports/karate-summary-json.txt').text.trim()
+                    def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
                     def json = new groovy.json.JsonSlurper().parseText(resulthtml)
                     def value = json.featuresPassed
                     echo "Value: ${value}"
