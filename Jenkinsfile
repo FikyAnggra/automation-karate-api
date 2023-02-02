@@ -120,7 +120,7 @@ pipeline {
                     def scenarioCount = json.featureSummary.scenarioCount
                     def passedCount = json.featureSummary.passedCount
                     def failedCount = json.featureSummary.failedCount
-                    def failed = json.featureSummary.failed
+//                     def failed = json.featureSummary.failed
                     for (int i = 0; i < featureSummary.size(); i++) {
                         def messageScenario = 
                             """
@@ -135,8 +135,8 @@ pipeline {
                             Scenario Failed     = ${failedCount[i]}
                             ============================================================
                             """
-                        echo "${messageScenario}"
-                        discordSend webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
+//                         echo "${messageScenario}"
+//                         discordSend webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
 //                         discordSend description: "${messageScenario}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
                     
                     }
@@ -154,7 +154,7 @@ pipeline {
                             Scenario Failed     = ${scenariosFailed}
                             ============================================================
                             """
-                       echo "${messageAllFeature}"
+//                        echo "${messageAllFeature}"
 //                     discordSend description: "${messageAllFeature}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
                     
                     
