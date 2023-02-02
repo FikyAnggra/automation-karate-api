@@ -131,7 +131,7 @@ pipeline {
                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
                     def json = new groovy.json.JsonSlurper().parseText(resulthtml)
                     def value = json.featureSummary.name
-                    def valuesplit = (json.featureSummary.name).split(/[\[\]\,]/)
+                    def valuesplit = value.split(/[\[\]\,]/)
                     echo "Value: ${value}"
                     echo "Value: ${valuesplit[1]}"
                 
