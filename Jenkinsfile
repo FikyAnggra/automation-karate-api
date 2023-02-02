@@ -102,7 +102,7 @@ pipeline {
                         def scenarioCount = json.featureSummary.scenarioCount[i]
                         def passedCount = json.featureSummary.passedCount[i]
                         def failedCount = json.featureSummary.failedCount[i]
-                        def failed = json.featureSummary.failedCount[i]
+                        def failed = json.featureSummary.failed[i]
                         def messageScenario = 
                                 """
                                 ============================================================
