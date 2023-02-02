@@ -16,6 +16,7 @@ pipeline {
             steps {
                 //Menjalankan tes menggunakan Maven
                 //bat 'mvn test -Dtest=TestRunnerProearn'
+                echo "test"
             }
         }
     }
