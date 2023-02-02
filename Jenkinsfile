@@ -130,7 +130,8 @@ pipeline {
                 
                 
                 //Read JSON data from file.txt
-                data=$(cat target/karate-reports/karate-summary-json.txt)
+                def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
+                data=$(cat ${resulthtml})
 
                 //Parse JSON data using jq
                 value=$(echo $data | jq '.featuresPassed')
