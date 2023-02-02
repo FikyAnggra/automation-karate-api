@@ -128,7 +128,7 @@ pipeline {
                             Scenario Failed     = ${scenariosfailed}
                             ============================================================
                             """
-                    echo "${messageAllFeature}"
+                    discordSend description: "${messageAllFeature}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
                     def featureSummary = json.featureSummary
                     def durationMillis = json.featureSummary.durationMillis
                     def name = json.featureSummary.name
@@ -150,7 +150,7 @@ pipeline {
                             Scenario Failed     = ${failedCount[i]}
                             ============================================================
                             """
-                        echo "${messageScenario}"
+                        discordSend description: "${messageScenario}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1069944985425813514/b9YiaaPSxha5_xyIzLd1R8-a85Um8wT4Y0OWxeoPU6EdVqv-gfFV6-2KwG4I9kHBXZNH"
                     }
                     
                 
