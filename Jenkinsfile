@@ -111,9 +111,8 @@ pipeline {
                 
                 
                 
-                    def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
+                    def resulthtml = readFile('target/karate-reports/karate-summary-json.txt').toString()
                     def json = new groovy.json.JsonSlurper().parseText(resulthtml)
-                echo "${json}"
                     json.each { object ->
 //                         def featureSummary = object.featureSummary
                         def durationMillis = object.featureSummary.durationMillis
