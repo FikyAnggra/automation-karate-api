@@ -87,7 +87,7 @@ pipeline {
 // //                     def hasil = result.split(",")
                
                     def resulthtml = readFile('target/karate-reports/karate-summary-json.txt')
-                    def hasil = resulthtml.split(/[\{\}\[\]]/)
+//                     def hasil = resulthtml.split(/[\{\}\[\]]/)
 //                     def subhasil = hasil[hasil.size() - 1].split(",")
 //                     def message = """
 //                     ============================================================
@@ -98,20 +98,10 @@ pipeline {
 //                     ${subhasil[2]} | ${subhasil[3]} | ${subhasil[6]}
 //                     ${subhasil[8]} | ${subhasil[10]}
 //                     """
-                
+                    def hasil = resulthtml.split(/[\{\}\[\]]/)
                     for (int i = 0; i < hasil.size(); i++) {
                         echo "result ke ${i} ${hasil[i]}" 
                         def subHasil = hasil[i].split(",")
-                        def message = 
-                            """
-                            ============================================================
-                                               Automation Karate API
-                                        ${subhasil[7]}
-                                               ${subhasil[4]}
-                            ============================================================
-                            ${subhasil[2]} | ${subhasil[3]} | ${subhasil[6]}
-                            ${subhasil[8]} | ${subhasil[10]}
-                            """
                         for (int j = 0; j < subHasil.size(); j++) {
                                 echo "sub result ke ${j} ${subHasil[j]}" 
                         }
