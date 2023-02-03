@@ -15,8 +15,7 @@ pipeline {
         stage('Test') {
             steps {
                 //Menjalankan tes menggunakan Maven
-//                 bat 'mvn test -Dtest=TestRunnerProearn'
-                echo "test"
+                bat 'mvn test -Dtest=TestRunnerProearn'
             }
         }
     }
