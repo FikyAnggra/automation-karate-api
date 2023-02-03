@@ -8,8 +8,8 @@ pipeline {
         //Tahap pertama bernama "Build"
         stage('Build') {
             steps {
-                git ("https://github.com/FikyAnggra/automation-karate-api.git")
-//                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/FikyAnggra/automation-karate-api.git']]])
+                
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/FikyAnggra/automation-karate-api.git']]])
            }
         }
         //Tahap kedua bernama "Test"
