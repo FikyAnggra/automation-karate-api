@@ -2,29 +2,30 @@
 pipeline {
     //Menetapkan agen sebagai 'any', yang berarti bisa dijalankan pada agen yang tersedia
     agent any
-    def notifyChat(String buildStatus = 'STARTED') {
-    // Build status of null means success.
-    buildStatus = buildStatus ?: 'SUCCESS'
-
-    if (buildStatus == 'STARTED') {
-        color = 'YELLOW'
-        colorCode = '#FFFF00'
-      } else if (buildStatus == 'SUCCESSFUL') {
-        color = 'GREEN'
-        colorCode = '#00FF00'
-      } else {
-        color = 'RED'
-        colorCode = '#FF0000'
-      }
-
-    discordSend description: 'Jenkins Pipeline Build', footer: buildStatus, link: env.BUILD_URL, result: currentBuild.currentResult, unstable: false, title: JOB_NAME, webhookURL: 'webhookhere'
-    }
+    
     
     //Mendefinisikan tahap-tahap dalam pipeline
     stages {
         //Tahap pertama bernama "Build"
         stage('Build') {
             steps {
+                def notifyChat(String buildStatus = 'STARTED') {
+                // Build status of null means success.
+                buildStatus = buildStatus ?: 'SUCCESS'
+
+                if (buildStatus == 'STARTED') {
+                    color = 'YELLOW'
+                    colorCode = '#FFFF00'
+                  } else if (buildStatus == 'SUCCESSFUL') {
+                    color = 'GREEN'
+                    colorCode = '#00FF00'
+                  } else {
+                    color = 'RED'
+                    colorCode = '#FF0000'
+                  }
+
+                discordSend description: 'Jenkins Pipeline Build', footer: buildStatus, link: env.BUILD_URL, result: currentBuild.currentResult, unstable: false, title: JOB_NAME, webhookURL: 'webhookhere'
+                }
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/FikyAnggra/automation-karate-api.git']]])
            }
         }
