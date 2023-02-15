@@ -62,7 +62,7 @@ pipeline {
                                 Scenario Passed = ${scenariosPassed}
                                 Scenario Failed = ${scenariosFailed}
                                 """
-                    discordSend description: "${messageAllFeature}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1075301952323334235/jiUG3kZ1OhJZQajubOjxsT2L8Z2Mo2zVoYIQTGlfWXh9v6c5QSuq9oQfvDaVRfGytNVk"
+                    discordSend description: "${messageAllFeature}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1075302537508433960/je-cWh3S_GYupDXwAksRmGuGqc8byeXaWxZa8qlWAm6ZRPrM0iWhXrxBcaTS-1oKcjOb"
                     
                     def featureSummary = json.featureSummary
                     for (int i = 0; i < featureSummary.size(); i++) {
