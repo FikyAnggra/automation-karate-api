@@ -2,13 +2,29 @@
 pipeline {
     //Menetapkan agen sebagai 'any', yang berarti bisa dijalankan pada agen yang tersedia
     agent any
+    def notifyChat(String buildStatus = 'STARTED') {
+    // Build status of null means success.
+    buildStatus = buildStatus ?: 'SUCCESS'
+
+    if (buildStatus == 'STARTED') {
+        color = 'YELLOW'
+        colorCode = '#FFFF00'
+      } else if (buildStatus == 'SUCCESSFUL') {
+        color = 'GREEN'
+        colorCode = '#00FF00'
+      } else {
+        color = 'RED'
+        colorCode = '#FF0000'
+      }
+
+    discordSend description: 'Jenkins Pipeline Build', footer: buildStatus, link: env.BUILD_URL, result: currentBuild.currentResult, unstable: false, title: JOB_NAME, webhookURL: 'webhookhere'
+    }
     
     //Mendefinisikan tahap-tahap dalam pipeline
     stages {
         //Tahap pertama bernama "Build"
         stage('Build') {
             steps {
-                
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/FikyAnggra/automation-karate-api.git']]])
            }
         }
@@ -35,17 +51,15 @@ pipeline {
                 
                     def messageAllFeature = 
                                 """
-                                ============================================================
-                                                   Automation Karate API
-                                ============================================================
-                                Running Date        = ${resultDate} 
-                                Total Running Time  = ${totalTime} m/s
-                                Feature Passed      = ${featuresPassed}
-                                Feature Skipped     = ${featuresSkipped}
-                                Feature Failed      = ${featuresFailed}
-                                Scenario Passed     = ${scenariosPassed}
-                                Scenario Failed     = ${scenariosFailed}
-                                ============================================================
+                                Result Automation Karate API NOBI\n
+
+                                Running Date = ${resultDate}
+                                Total Running Time = ${totalTime} m/s
+                                Feature Passed = ${featuresPassed}
+                                Feature Skipped = ${featuresSkipped}
+                                Feature Failed = ${featuresFailed}
+                                Scenario Passed = ${scenariosPassed}
+                                Scenario Failed = ${scenariosFailed}
                                 """
                     discordSend description: "${messageAllFeature}", footer: "${currentBuild.currentResult}", link: "$BUILD_URL", result: currentBuild.currentResult, title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1072734716886794274/RghElH0uJUr8yKvLA8VzgezPOsPIk6czQktKXqwZjvfSneNmDitnwN4MSZWZv66jA6vm"
                     
@@ -71,13 +85,19 @@ pipeline {
                                 Scenario Failed     = ${failedCount}
                                 ============================================================
                                 """
-                        if (failed == true) {
-                            discordSend description: "${messageScenario}", footer: "FAILURE", link: "http://localhost:8888/job/automation-karate-api/${env.BUILD_NUMBER}/execution/node/3/ws/target/karate-reports/${packageQualifiedName}.html", result: "FAILURE", title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1072734716886794274/RghElH0uJUr8yKvLA8VzgezPOsPIk6czQktKXqwZjvfSneNmDitnwN4MSZWZv66jA6vm"
-                        } else {
-                            discordSend description: "${messageScenario}", footer: "SUCCESS", link: "http://localhost:8888/job/automation-karate-api/${env.BUILD_NUMBER}/execution/node/3/ws/target/karate-reports/${packageQualifiedName}.html", result: "SUCCESS", title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1072734716886794274/RghElH0uJUr8yKvLA8VzgezPOsPIk6czQktKXqwZjvfSneNmDitnwN4MSZWZv66jA6vm"
-                        }
+//                         if (failed == true) {
+//                             discordSend description: "${messageScenario}", footer: "FAILURE", link: "http://localhost:8888/job/automation-karate-api/${env.BUILD_NUMBER}/execution/node/3/ws/target/karate-reports/${packageQualifiedName}.html", result: "FAILURE", title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1072734716886794274/RghElH0uJUr8yKvLA8VzgezPOsPIk6czQktKXqwZjvfSneNmDitnwN4MSZWZv66jA6vm"
+//                         } else {
+//                             discordSend description: "${messageScenario}", footer: "SUCCESS", link: "http://localhost:8888/job/automation-karate-api/${env.BUILD_NUMBER}/execution/node/3/ws/target/karate-reports/${packageQualifiedName}.html", result: "SUCCESS", title: "Jenkins Pipeline Build ${env.BUILD_NUMBER}", webhookURL: "https://discord.com/api/webhooks/1072734716886794274/RghElH0uJUr8yKvLA8VzgezPOsPIk6czQktKXqwZjvfSneNmDitnwN4MSZWZv66jA6vm"
+//                         }
                         
                     }
+            }
+            success {
+                notifyChat("SUCCESSFUL")
+            }
+            failure {
+                notifyChat("FAILURE")
             }
         }
     }
